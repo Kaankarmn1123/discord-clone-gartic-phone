@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import GarticDev from './GarticDev';
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {
@@ -9,8 +10,9 @@ if (!rootElement) {
 }
 
 const root = ReactDOM.createRoot(rootElement);
+const renderDev = process.env.REACT_APP_GARTIC_DEV === '1';
 root.render(
   <React.StrictMode>
-    <App />
+    {renderDev ? <GarticDev /> : <App />}
   </React.StrictMode>
 );
