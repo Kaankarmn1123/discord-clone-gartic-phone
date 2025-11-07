@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SERÇE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'slate': {
+                            900: '#1e2124',
+                            800: '#282b30',
+                            700: '#36393f',
+                            600: '#424549',
+                            500: '#72767d',
+                            400: '#96989d',
+                            300: '#b9bbbe',
+                            200: '#dcddde',
+                            100: '#f6f6f7',
+                        },
+                        'violet': { // This is used for the red "Kızıl Serçe" theme
+                            300: '#fca5a5',
+                            400: '#f87171',
+                            500: '#ef4444',
+                            600: '#dc2626',
+                            700: '#b91c1c',
+                        },
+                        'blue': {
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        },
+                        'emerald': {
+                            300: '#6ee7b7',
+                            400: '#34d399',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                        },
+                        'purple': {
+                            300: '#c084fc',
+                            400: '#a855f7',
+                            500: '#9333ea',
+                            600: '#7e22ce',
+                            700: '#6b21a8',
+                        },
+                        'indigo': {
+                            300: '#a5b4fc',
+                            400: '#818cf8',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                        },
+                    },
+                    keyframes: {
+                        'pulse-grow': {
+                            '0%, 100%': { transform: 'scale(1)', opacity: '0.8' },
+                            '50%': { transform: 'scale(1.05)', opacity: '1' },
+                        },
+                    },
+                    animation: {
+                        'pulse-grow': 'pulse-grow 2.5s cubic-bezier(0.4, 0.6, 1) infinite',
+                    },
+                },
+            },
+        }
+    </script>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "@supabase/supabase-js": "https://aistudiocdn.com/@supabase/supabase-js@^2.75.1",
+    "date-fns": "https://aistudiocdn.com/date-fns@^4.1.0",
+    "agora-rtc-sdk-ng": "https://aistudiocdn.com/agora-rtc-sdk-ng@^4.24.0",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^0.14.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-slate-900">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "name": "Copy of SERÇE2 yedek 22",
+  "description": "A real-time chat application similar to Discord, built with React, Supabase, and Agora for voice/video calls. This application is designed to work on desktop (with Electron) and mobile (with React Native).",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}

@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    overflow: hidden; /* Prevent body scroll */
+}
+
+/* Custom Scrollbar Styling for a more Discord-like feel */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #282b30; /* bg-slate-800 */
+}
+::-webkit-scrollbar-thumb {
+    background: #1e2124; /* bg-slate-900 */
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #111214;
+}
