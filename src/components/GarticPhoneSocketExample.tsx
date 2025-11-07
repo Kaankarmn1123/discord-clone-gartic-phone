@@ -22,7 +22,7 @@ const GarticPhoneSocketExample: React.FC<GarticGameProps> = ({ roomId, userId, u
 
   useEffect(() => {
     // Socket.IO bağlantısını kur
-    const newSocket = io(process.env.REACT_APP_SOCKET_URL || 'http://localhost:3001');
+    const newSocket = io(process.env.REACT_APP_SOCKET_URL || 'http://localhost:3004');
     setSocket(newSocket);
 
     newSocket.on('connect', () => {
@@ -39,44 +39,45 @@ const GarticPhoneSocketExample: React.FC<GarticGameProps> = ({ roomId, userId, u
     });
 
     // Gartic Phone eventleri
-    newSocket.on('gartic-room-joined', (data) => {
+    newSocket.on('gartic-room-joined', (data: unknown) => {
       console.log('✅ Gartic Phone odasına katıldınız:', data);
     });
 
-    newSocket.on('user-joined-gartic', (userData) => {
+    newSocket.on('user-joined-gartic', (userData: { username: string }) => {
       console.log('👤 Yeni oyuncu katıldı:', userData);
       setPlayers(prev => [...prev, userData.username]);
     });
 
-    newSocket.on('user-left-gartic', (userData) => {
+    newSocket.on('user-left-gartic', (userData: { username: string }) => {
       console.log('👋 Oyuncu ayrıldı:', userData);
       setPlayers(prev => prev.filter(player => player !== userData.username));
     });
 
-    newSocket.on('gartic-game-started', (gameData) => {
+    newSocket.on('gartic-game-started', (gameData: unknown) => {
       console.log('🎮 Gartic Phone oyunu başladı:', gameData);
       setGameStarted(true);
       setCurrentRound(1);
     });
 
-    newSocket.on('gartic-round-update', (roundData) => {
+    newSocket.on('gartic-round-update', (roundData: { round: number }) => {
       console.log('🔄 Yeni tur:', roundData);
       setCurrentRound(roundData.round);
     });
 
-    newSocket.on('gartic-new-drawing', (drawingData) => {
+    newSocket.on('gartic-new-drawing', (drawingData: unknown) => {
       console.log('🎨 Yeni çizim geldi:', drawingData);
       // Çizimi işle
     });
 
-    newSocket.on('gartic-new-guess', (guessData) => {
+    newSocket.on('gartic-new-guess', (guessData: unknown) => {
       console.log('💭 Yeni tahmin geldi:', guessData);
       // Tahmini işle
     });
 
-    newSocket.on('error', (error) => {
-      console.error('❌ Server hatası:', error.message);
-      alert(`Hata: ${error.message}`);
+    newSocket.on('error', (error: { message?: string }) => {
+      const msg = error?.message || 'Bilinmeyen hata';
+      console.error('❌ Server hatası:', msg);
+      alert(`Hata: ${msg}`);
     });
 
     return () => {
