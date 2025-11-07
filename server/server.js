@@ -14,7 +14,11 @@ const io = socketIo(server, {
 });
 
 const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_KEY;
+// Accept multiple env names to avoid deployment mismatches
+const supabaseKey =
+  process.env.SUPABASE_KEY ||
+  process.env.SUPABASE_ANON_KEY ||
+  process.env.SUPABASE_SERVICE_KEY;
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
 
 console.log('🚀 Game Server Starting...');
