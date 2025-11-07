@@ -13,7 +13,19 @@ const io = socketIo(server, {
   }
 });
 
-const supabaseUrl = process.env.SUPABASE_URL;
+// Validate SUPABASE_URL to avoid runtime crashes with invalid values
+const isValidSupabaseUrl = (url) => {
+  if (!url) return false;
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+  } catch (e) {
+    return false;
+  }
+};
+
+const supabaseUrlRaw = process.env.SUPABASE_URL;
+const supabaseUrl = isValidSupabaseUrl(supabaseUrlRaw) ? supabaseUrlRaw : null;
 // Accept multiple env names to avoid deployment mismatches
 const supabaseKey =
   process.env.SUPABASE_KEY ||
@@ -22,9 +34,13 @@ const supabaseKey =
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
 
 console.log('🚀 Game Server Starting...');
-console.log('Supabase URL:', supabaseUrl);
+console.log('Supabase URL:', supabaseUrlRaw);
 console.log('Supabase Key:', supabaseKey ? 'Present' : 'Missing');
 console.log('Frontend URL:', FRONTEND_URL);
+
+if (supabaseUrlRaw && !supabaseUrl) {
+  console.error('❌ Invalid SUPABASE_URL: Must be a valid HTTP/HTTPS URL');
+}
 
 // Test modu için development ortamında credentials kontrolünü esnet
 if (process.env.NODE_ENV === 'production' && (!supabaseUrl || !supabaseKey)) {
